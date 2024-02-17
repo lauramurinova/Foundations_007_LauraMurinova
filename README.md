@@ -1,11 +1,5 @@
-# XR Bootcamp Git Introduction
+This repo contains the project files for the XR foundations program by Laura Murinova.
 
-A simple project to prepare you to use Git. This Readme file will serve as the first file you commit to the Github Repo.
-
-## Table of Contents
-
-- [About](#about)
-- [Todo](#todo)
 
 ## About
 
