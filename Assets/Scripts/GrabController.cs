@@ -15,7 +15,7 @@ public class GrabController : MonoBehaviour
     private Transform hand;
 
     /// <summary>
-    /// Updates each frame, checks for user input and calls check for grab or release of the object.
+    /// Updates each frame, calls check for grabbable objects in the area and user input for grab/drop.
     /// </summary>
     private void Update()
     {
@@ -36,7 +36,7 @@ public class GrabController : MonoBehaviour
 
 
     /// <summary>
-    /// Checks via raycaster (center of the screen) if there is any object to pick up.
+    /// Checks for any grabbable objects via raycaster, if any it outlines them.
     /// </summary>
     private void CheckForHitGrabbableObject()
     {
