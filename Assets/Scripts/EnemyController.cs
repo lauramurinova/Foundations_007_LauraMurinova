@@ -1,30 +1,36 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float threshold = 0.5f;
-    [SerializeField] private Transform point1;
-    [SerializeField] private Transform point2;
 
+    [SerializeField] private Transform destinationPointsParent;
+    private List<Transform> points = new List<Transform>();
+    
     private bool _moving = false;
     private Transform _currentPoint;
 
+    /// <summary>
+    /// Ensures dynamic loading of points.
+    /// </summary>
+    private void Start()
+    {
+        LoadDestinationPoints();
+    }
+
+    /// <summary>
+    /// Ensures the enemy to pend between multiple point positions.
+    /// </summary>
     void Update()
     {
         if (!_moving)
         {
-            if (_currentPoint == point1)
-            {
-                _currentPoint = point2;
-            }
-            else
-            {
-                _currentPoint = point1;
-            }
-            
-            agent.SetDestination(_currentPoint.position);
+            agent.SetDestination(GetNextDestinationPoint().position);
             _moving = true;
         }
 
@@ -32,5 +38,31 @@ public class EnemyController : MonoBehaviour
         {
             _moving = false;
         }
+    }
+
+    /// <summary>
+    /// Loads dynamically destination points from a parent and loads them into the points list.
+    /// </summary>
+    private void LoadDestinationPoints()
+    {
+        foreach (Transform destinationPoint in destinationPointsParent)
+        {
+            points.Add(destinationPoint);
+        }
+    }
+
+    /// <summary>
+    /// Returns a random destination point from the points list.
+    /// </summary>
+    private Transform GetNextDestinationPoint()
+    {
+        int randomPointPosition = Random.Range(0, points.Count);
+        while (points.Count > 1 && points[randomPointPosition] == _currentPoint)
+        {
+            randomPointPosition = Random.Range(0, points.Count);
+        }
+
+        _currentPoint = points[randomPointPosition];
+        return _currentPoint;
     }
 }
