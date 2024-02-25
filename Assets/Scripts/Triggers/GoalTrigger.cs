@@ -13,7 +13,7 @@ public class GoalTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Checks for player collision with this gameObject.
-        if (other.gameObject.tag.Equals("Player") && _goalReachedCoroutine == null)
+        if (other.gameObject.CompareTag("Player") && _goalReachedCoroutine == null)
         {
             _goalReachedCoroutine = StartCoroutine(GoalReachedCoroutine());
         }
