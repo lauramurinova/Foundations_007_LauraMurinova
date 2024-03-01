@@ -1,0 +1,6 @@
+Textures - Paint (walls): https://everytexture.com/everytexture-com-stock-pavement-concrete-texture-00040/
+	 - Metal (floor): https://everytexture.com/everytexture-com-stock-pavement-texture-00071/
+         - Metal Rusty Blue (barrel): https://everytexture.com/everytexture-com-stock-metal-texture-00034/
+	 - Metal Rusty (mine): https://everytexture.com/everytexture-com-stock-metal-texture-00129/
+         - Warning (doors, stairs): https://everytexture.com/everytexture-com-stock-plastic-texture-00055/
+

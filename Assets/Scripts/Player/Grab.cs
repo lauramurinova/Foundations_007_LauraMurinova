@@ -25,7 +25,6 @@ public class Grab : MonoBehaviour
     {
         if (_grabPressed)
         {
-            Debug.Log("RELEASEd");
             _grabPressed = false;
 
             if (!_grabbedObject) return;
@@ -34,21 +33,29 @@ public class Grab : MonoBehaviour
         }
         else
         {
-            Debug.Log("PRESSED");
             _grabPressed = true;
 
             if (Physics.Raycast(_cameraPosition.position, _cameraPosition.forward, out RaycastHit hit, _grabRange))
             {
-                if (!hit.transform.gameObject.CompareTag("Grabbable")) return;
+                if (!hit.transform.gameObject.TryGetComponent(out Grabbable grabbable)) return;
 
-                _grabbedObject = hit.transform.GetComponent<Rigidbody>();
-                _grabbedObject.transform.parent = _holdPosition;
+                GrabObject(hit.transform.GetComponent<Rigidbody>(), grabbable);
             }
         }
     }
 
+    private void GrabObject(Rigidbody grabbedObject, Grabbable grabbable)
+    {
+        _grabbedObject = grabbedObject;
+        _grabbedObject.transform.parent = _holdPosition;
+        _grabbedObject.freezeRotation = true;
+        grabbable.ResetTransform();
+        grabbable.grabEvent.Invoke();
+    }
+
     private void DropGrabbedObject()
     {
+        _grabbedObject.freezeRotation = false;
         _grabbedObject.transform.parent = null;
         _grabbedObject = null;
     }
@@ -56,8 +63,10 @@ public class Grab : MonoBehaviour
     private void OnThrow()
     {
         if(!_grabbedObject) return;
-        
+
+        var grabbable = _grabbedObject.GetComponent<Grabbable>();
         _grabbedObject.AddForce(_cameraPosition.forward * _throwForce, ForceMode.Impulse);
         DropGrabbedObject();
+        grabbable.throwEvent.Invoke();
     }
 }
