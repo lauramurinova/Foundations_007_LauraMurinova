@@ -13,7 +13,7 @@ public class PatrolRoute : MonoBehaviour
         PingPong = 1
     }
 
-    [FormerlySerializedAs("patrolRouteColor")] [SerializeField] private Color _patrolRouteColor = Color.green;
+    [SerializeField] private Color _patrolRouteColor = Color.green;
     
     public PatrolType patrolType;
     public List<Transform> route;

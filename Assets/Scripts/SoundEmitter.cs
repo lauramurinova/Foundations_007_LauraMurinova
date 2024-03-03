@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SoundEmitter : MonoBehaviour
 {
-    [SerializeField] private float _soundRadius = 5f;
+    [SerializeField] private float _soundRadius = 15f;
     [SerializeField] private float _impulseThreshold = 1f;
     
     private AudioSource _audioSource;
@@ -38,3 +38,4 @@ public class SoundEmitter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _soundRadius);
     }
 }
+
