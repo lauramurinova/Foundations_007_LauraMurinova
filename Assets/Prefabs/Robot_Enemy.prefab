@@ -70,9 +70,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6a3964ce841984282cecb2ca4d7a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlly: 0
+  _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   _agent: {fileID: 5201338340535791371}
+  _transform: {fileID: 0}
   _threshold: 0.5
+  _hearingRadius: 10
+  _waitTime: 2
   _patrolRoute: {fileID: 0}
+  _fieldOfView: {fileID: 0}
+  _state: 0
+  _questionMarks: {fileID: 0}
 --- !u!114 &5201338340535791373
 MonoBehaviour:
   m_ObjectHideFlags: 0

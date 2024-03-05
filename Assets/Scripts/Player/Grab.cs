@@ -1,23 +1,24 @@
-using System;
 using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
     [SerializeField] private Transform _cameraPosition;
     [SerializeField] private Transform _holdPosition;
+    [SerializeField] private Transform _hidePosition;
     [SerializeField] private float _grabRange = 2;
     [SerializeField] private float _throwForce = 20f;
     [SerializeField] private float _snapSpeed = 40f;
 
     private Rigidbody _grabbedObject;
     private bool _grabPressed = false;
+    private Transform _originalParent = null;
 
     private void FixedUpdate()
     {
         if (_grabbedObject)
         {
-            _grabbedObject.velocity = (_holdPosition.position - _grabbedObject.transform.position) * _snapSpeed;
-            
+            _grabbedObject.velocity = (_grabbedObject.transform.parent.position - _grabbedObject.transform.position) * _snapSpeed;
+
         }
     }
 
@@ -47,16 +48,27 @@ public class Grab : MonoBehaviour
     private void GrabObject(Rigidbody grabbedObject, Grabbable grabbable)
     {
         _grabbedObject = grabbedObject;
-        _grabbedObject.transform.parent = _holdPosition;
+        _originalParent = _grabbedObject.transform.parent;
+        if (grabbable is HideableGrabbable hideableGrabbable)
+        {
+            hideableGrabbable.transform.parent = _hidePosition;
+        }
+        else
+        {
+            _grabbedObject.transform.parent = _holdPosition;
+        }
+
+        
         _grabbedObject.freezeRotation = true;
         grabbable.ResetTransform();
         grabbable.grabEvent.Invoke();
     }
-
+    
     private void DropGrabbedObject()
     {
         _grabbedObject.freezeRotation = false;
-        _grabbedObject.transform.parent = null;
+        _grabbedObject.transform.parent = _originalParent;
+        _grabbedObject.GetComponent<Grabbable>().releaseEvent.Invoke();
         _grabbedObject = null;
     }
 

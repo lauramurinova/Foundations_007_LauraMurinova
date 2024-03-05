@@ -5,8 +5,9 @@ public class Grabbable : MonoBehaviour
 {
     [HideInInspector] public UnityEvent throwEvent = new UnityEvent();
     [HideInInspector] public UnityEvent grabEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent releaseEvent = new UnityEvent();
     public Transform grabPoint;
-
+    
     /// <summary>
     /// Resets transform position and rotation to default values.
     /// </summary>
