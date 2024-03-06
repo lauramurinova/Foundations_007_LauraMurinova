@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> enemies;
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _ragdollPrefab;
     [SerializeField] private float _threshold = 0.5f;
     [SerializeField] private float coolDownTime = 30f;
     
@@ -37,6 +38,30 @@ public class EnemyManager : MonoBehaviour
             _instance = this;
         }
     }
+    
+
+    /// <summary>
+    /// Destroys the robot by disabling the original one and enabling the ragdoll robot.
+    /// </summary>
+    public void DestroyRobot(EnemyController robot)
+    {
+        robot.DisableMovement();
+        StartCoroutine(RagdollTransition(robot, 0.5f));
+    }
+
+    /// <summary>
+    /// Smooth transition of enemy robot to ragdoll in given duration.
+    /// </summary>
+    private IEnumerator RagdollTransition(EnemyController robot, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Instantiate(_ragdollPrefab, robot.transform.position, robot.transform.rotation, transform);
+        if (enemies.Remove(robot))
+        {
+            Destroy(robot.gameObject);
+        }
+    }
+    
 
     /// <summary>
     /// Starts the time while the players can investigate the same point - giving the player the option to escape.

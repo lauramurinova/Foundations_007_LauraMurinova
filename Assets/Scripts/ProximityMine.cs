@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class ProximityMine : MonoBehaviour
 {
-    [SerializeField] private float maxDistanceFromWall = 3.5f;
-    [SerializeField] private float explosionSize = 7f;
+    [SerializeField] private float mineMaxDistanceDetection = 3.5f;
+    [SerializeField] private float explosionSize = 3f;
     [SerializeField] private LayerMask robotMask;
-    [SerializeField] private GameObject explosionParticleObject;
-    [SerializeField] private AudioSource explosionAudio;
+    [SerializeField] private GameObject explosionPrefab;
 
     private Rigidbody _rigidBody;
     private Transform _transform;
@@ -42,15 +38,12 @@ public class ProximityMine : MonoBehaviour
     /// </summary>
     private void CheckForEnemyRobot()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, maxDistanceFromWall, robotMask))
+        if (Physics.Raycast(transform.position, transform.forward, out var hit, mineMaxDistanceDetection, robotMask))
         {
-            if (hit.transform.gameObject.TryGetComponent(out Creature creature))
+            if (hit.transform.gameObject.TryGetComponent(out EnemyController enemy))
             {
-                if (creature.team.Equals(Creature.Team.Enemy))
-                {
-                    DisableEnemy(creature.gameObject);
-                    DisableMine();
-                }
+                DestroyEnemy(enemy);
+                DestroyMine();
             }
         }
     }
@@ -61,7 +54,7 @@ public class ProximityMine : MonoBehaviour
     /// </summary>
     private void TryToStick()
     {
-        if (Physics.Raycast(transform.position, -transform.forward, out var hit, maxDistanceFromWall))
+        if (Physics.Raycast(transform.position, -transform.forward, out var hit, mineMaxDistanceDetection))
         {
             if (hit.transform.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")))
             {
@@ -88,31 +81,29 @@ public class ProximityMine : MonoBehaviour
 
     
     /// <summary>
-    /// Disables the enemy robot and plays particle effects.
+    /// Destroys the enemy (to ragdoll state).
     /// </summary>
-    [Button]
-    private void DisableEnemy(GameObject enemy)
+    private void DestroyEnemy(EnemyController enemy)
     {
-        Instantiate(explosionParticleObject, _transform.position, _transform.rotation, _transform).transform.localScale *= explosionSize;
-        explosionAudio.Play();
-        enemy.SetActive(false);
+        EnemyManager.GetInstance().DestroyRobot(enemy);
     }
 
     /// <summary>
-    /// Disables the mine (after explosion).
+    /// Destroys the mine with particle and sound effect.
     /// </summary>
-    private void DisableMine()
+    [Button]
+    private void DestroyMine()
     {
-        _isStick = false;
-        GetComponent<MeshRenderer>().enabled = false;
+        Instantiate(explosionPrefab, _transform.position, _transform.rotation).transform.localScale *= explosionSize;
+        Destroy(gameObject);
     }
     
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + -transform.forward * maxDistanceFromWall);
+        Gizmos.DrawLine(transform.position, transform.position + -transform.forward * mineMaxDistanceDetection);
         
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * maxDistanceFromWall);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * mineMaxDistanceDetection);
     }
 }

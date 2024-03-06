@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject _questionMarks;
 
     private bool _moving = false;
+    private bool _disabled = false;
     private Transform _currentPoint;
     private int _routeIndex = 0;
     private bool _forwardsAlongPath = true;
@@ -41,12 +42,15 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (_fieldOfView.visibleObjects.Count > 0)
+        if (!_disabled)
         {
-            InvestigatePoint(_fieldOfView.visibleObjects[0].position);
+            if (_fieldOfView.visibleObjects.Count > 0)
+            {
+                InvestigatePoint(_fieldOfView.visibleObjects[0].position);
+            }
+
+            UpdateBasedOnState();
         }
-        
-        UpdateBasedOnState();
     }
 
     private void UpdateBasedOnState()
@@ -70,6 +74,15 @@ public class EnemyController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// Disables enemy, stops it from moving;
+    /// </summary>
+    public void DisableMovement()
+    {
+        _agent.enabled = false;
+        _disabled = true;
     }
     
     /// <summary>
