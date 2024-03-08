@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,9 +9,14 @@ public class EnemyController : MonoBehaviour
         Patrol = 0,
         Investigate = 1
     }
+
+    public UnityEvent<Transform> onPlayerFound;
+    public UnityEvent onInvestigate;
+    public UnityEvent onReturnToPatrol;
     
-    [FormerlySerializedAs("agent")] [SerializeField] private NavMeshAgent _agent;
-    [FormerlySerializedAs("threshold")] [SerializeField] private float _threshold = 0.5f;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _threshold = 0.5f;
     [SerializeField] private float _waitTime = 2f;
     [SerializeField] private PatrolRoute _patrolRoute;
     [SerializeField] private FieldOfView _fieldOfView;
@@ -24,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private bool _forwardsAlongPath = true;
     private Vector3 _investigationPoint;
     private float _waitTimer = 0f;
+    private bool _playerFound = false;
 
     private void Start()
     {
@@ -32,9 +37,11 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
+        
         if (_fieldOfView.visibleObjects.Count > 0)
         {
-            InvestigatePoint(_fieldOfView.visibleObjects[0].position);
+            PlayerFound(_fieldOfView.visibleObjects[0].position);
         }
         
         if (_state.Equals(EnemyState.Patrol))
@@ -49,9 +56,27 @@ public class EnemyController : MonoBehaviour
 
     public void InvestigatePoint(Vector3 investigationPoint)
     {
+        SetInvestigationPoint(investigationPoint);
+
+        onInvestigate.Invoke();
+    }
+
+    private void SetInvestigationPoint(Vector3 investigationPoint)
+    {
         _state = EnemyState.Investigate;
         _investigationPoint = investigationPoint;
         _agent.SetDestination(_investigationPoint);
+    }
+
+    private void PlayerFound(Vector3 investigatePoint)
+    {
+        if (_playerFound) return;
+        
+        SetInvestigationPoint(investigatePoint);
+        
+        onPlayerFound.Invoke(_fieldOfView.creature.head);
+
+        _playerFound = true;
     }
 
     private void UpdateInvestigate()
@@ -71,6 +96,8 @@ public class EnemyController : MonoBehaviour
         _state = EnemyState.Patrol;
         _waitTimer = 0f;
         _moving = false;
+        
+        onReturnToPatrol.Invoke();
     }
 
     private void UpdatePatrol()

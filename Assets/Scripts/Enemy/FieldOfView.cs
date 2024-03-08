@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private float _viewRadius = 6f;
     [SerializeField] private float _viewAngle = 30f;
-    [SerializeField] private Creature _creature;
     [SerializeField] private LayerMask _blockingLayers;
+    
+    public Creature creature;
 
     private void Update()
     {
@@ -21,13 +23,13 @@ public class FieldOfView : MonoBehaviour
         {
             if (!target.TryGetComponent(out Creature targetCreature)) continue;
             
-            if(_creature.team.Equals(targetCreature.team)) continue;
+            if(creature.team.Equals(targetCreature.team)) continue;
             
             Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
 
             if (Vector3.Angle(transform.forward, directionToTarget) < _viewAngle)
             {
-                Vector3 headPos = _creature.head.position;
+                Vector3 headPos = creature.head.position;
                 Vector3 targetHeadPos = targetCreature.head.position;
 
                 Vector3 dirToTargetHead = (targetHeadPos - headPos).normalized;
