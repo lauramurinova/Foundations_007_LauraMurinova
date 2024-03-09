@@ -1,0 +1,9 @@
+Textures - Ice: https://everytexture.com/everytexture-com-stock-nature-snow-00013/
+         - Ice Walls: https://everytexture.com/everytexture-com-stock-misc-texture-00047/
+         - Snow: https://everytexture.com/everytexture-com-stock-nature-snow-00018/
+         - Warning (doors, cones): https://everytexture.com/everytexture-com-stock-plastic-texture-00055/
+
+Models - rocks: https://assetstore.unity.com/packages/3d/environments/landscapes/stylized-low-poly-rocks-271334
+       - Wet Floor Sign: https://www.cgtrader.com/items/2947231/download-page
+       - Alarm Light: (https://skfb.ly/oHzro) by Bluenoseddonkey is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/)
+
