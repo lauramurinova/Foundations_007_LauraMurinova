@@ -64,20 +64,21 @@ public class EnemyController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Destroys the robot and makes it explode.
     /// </summary>
     public void Explode()
     {
         if (!_destroyed)
         {
             _destroyed = true;
+            
             StartCoroutine(ExplodeTransition());
         }
 
     }
 
     /// <summary>
-    /// 
+    /// Freezes and explodes the robot over time.
     /// </summary>
     /// <returns></returns>
     private IEnumerator ExplodeTransition()
@@ -87,8 +88,21 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _renderer.material = _frozenRobotMat;
         yield return new WaitForSeconds(2f);
-        Instantiate(_robotGiblets, transform.position, transform.rotation);
+        var robot = Instantiate(_robotGiblets, transform.position, transform.rotation);
+        ApplyExplosionForceToObject(robot);
+
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Add explosion forces to each rigidBody of the object passed.
+    /// </summary>
+    private void ApplyExplosionForceToObject(GameObject robot)
+    {
+        foreach (var rigidbody in robot.GetComponentsInChildren<Rigidbody>())
+        {
+            rigidbody.AddExplosionForce(400f, rigidbody.transform.position, 2f);
+        }
     }
 
     public void InvestigatePoint(Vector3 investigationPoint)
