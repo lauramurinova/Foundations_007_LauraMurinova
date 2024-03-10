@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -13,14 +14,18 @@ public class EnemyController : MonoBehaviour
     public UnityEvent<Transform> onPlayerFound;
     public UnityEvent onInvestigate;
     public UnityEvent onReturnToPatrol;
-    
+
+    [SerializeField] private GameObject _robotGiblets;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
+    [SerializeField] private SkinnedMeshRenderer _renderer;
     [SerializeField] private float _threshold = 0.5f;
     [SerializeField] private float _waitTime = 2f;
     [SerializeField] private PatrolRoute _patrolRoute;
     [SerializeField] private FieldOfView _fieldOfView;
     [SerializeField] private EnemyState _state = EnemyState.Patrol;
+    [SerializeField] private Material _frozenRobotMat;
+    [SerializeField] private AudioSource _freezeAudio;
 
     private bool _moving = false;
     private Transform _currentPoint;
@@ -29,6 +34,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 _investigationPoint;
     private float _waitTimer = 0f;
     private bool _playerFound = false;
+    private bool _destroyed = false;
 
     private void Start()
     {
@@ -39,19 +45,50 @@ public class EnemyController : MonoBehaviour
     {
         _animator.SetFloat("Speed", _agent.velocity.magnitude);
         
-        if (_fieldOfView.visibleObjects.Count > 0)
+        if (!_destroyed)
         {
-            PlayerFound(_fieldOfView.visibleObjects[0].position);
+            if (_fieldOfView.visibleObjects.Count > 0)
+            {
+                PlayerFound(_fieldOfView.visibleObjects[0].position);
+            }
+
+            if (_state.Equals(EnemyState.Patrol))
+            {
+                UpdatePatrol();
+            }
+            else if (_state.Equals(EnemyState.Investigate))
+            {
+                UpdateInvestigate();
+            }
         }
-        
-        if (_state.Equals(EnemyState.Patrol))
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Explode()
+    {
+        if (!_destroyed)
         {
-            UpdatePatrol();
+            _destroyed = true;
+            StartCoroutine(ExplodeTransition());
         }
-        else if(_state.Equals(EnemyState.Investigate))
-        {
-            UpdateInvestigate();
-        }
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ExplodeTransition()
+    {
+        _agent.isStopped = true;
+        _freezeAudio.Play();
+        yield return new WaitForSeconds(0.5f);
+        _renderer.material = _frozenRobotMat;
+        yield return new WaitForSeconds(2f);
+        Instantiate(_robotGiblets, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
     public void InvestigatePoint(Vector3 investigationPoint)

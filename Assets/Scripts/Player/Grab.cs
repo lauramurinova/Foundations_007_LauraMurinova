@@ -17,7 +17,6 @@ public class Grab : MonoBehaviour
         if (_grabbedObject)
         {
             _grabbedObject.velocity = (_holdPosition.position - _grabbedObject.transform.position) * _snapSpeed;
-            
         }
     }
 
@@ -43,6 +42,20 @@ public class Grab : MonoBehaviour
 
                 _grabbedObject = hit.transform.GetComponent<Rigidbody>();
                 _grabbedObject.transform.parent = _holdPosition;
+                _grabbedObject.freezeRotation = true;
+                
+                if(!_grabbedObject.TryGetComponent(out Grabbable grabbable)) return;
+                if (grabbable.grabPoint)
+                {
+                    _grabbedObject.transform.localPosition = grabbable.grabPoint.transform.localPosition;
+                    _grabbedObject.transform.localRotation = grabbable.grabPoint.transform.localRotation;
+                }
+                
+                if (_grabbedObject.TryGetComponent(out Gun gun))
+                {
+                    gun.isGrabbed = true;
+                };
+
             }
         }
     }
@@ -50,6 +63,13 @@ public class Grab : MonoBehaviour
     private void DropGrabbedObject()
     {
         _grabbedObject.transform.parent = null;
+        _grabbedObject.freezeRotation = false;
+
+        if (_grabbedObject.TryGetComponent(out Gun gun))
+        {
+            gun.isGrabbed = false;
+        };
+
         _grabbedObject = null;
     }
 
