@@ -51,7 +51,7 @@
                     "id": "5d15d575-13f7-4deb-82b1-3c48e41f586e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press"
                 },
                 {
                     "name": "Throw",
@@ -65,6 +65,14 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "2e3eb023-e672-4e1a-ae6c-b56566e53ebc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "b141998a-6568-43f4-892a-c554f50370c2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -288,6 +296,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a91cec37-a37f-47e1-9bee-1411b0190d72",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

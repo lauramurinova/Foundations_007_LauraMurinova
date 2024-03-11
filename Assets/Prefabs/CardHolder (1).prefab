@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 4701219612250495572}
   - component: {fileID: 4701219612250495571}
   - component: {fileID: 5620351071928411906}
+  - component: {fileID: 6821594146740480140}
   m_Layer: 0
   m_Name: CardHolder (1)
   m_TagString: Untagged
@@ -391,11 +392,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5620351071928411904}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.842135, y: 2.605469, z: 1.3087484}
-  m_Center: {x: 0.9791494, y: 0.69991654, z: 0.14376718}
+  m_Size: {x: 2.8421345, y: 2.605469, z: 0.21998724}
+  m_Center: {x: 0.97914964, y: 0.69991624, z: 0.08032353}
 --- !u!114 &4701219612250495571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,3 +517,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &6821594146740480140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620351071928411904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8421345, y: 2.605469, z: 0.65887517}
+  m_Center: {x: 0.97914964, y: 0.6999163, z: -0.1391201}

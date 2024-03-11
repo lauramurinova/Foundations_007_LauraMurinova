@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
       Instantiate(_bullet, transform);
       _fireBulletAudio.Play();
       _fireTimer = 0f;
+      GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 10f);
    }
 
    private void Update()
