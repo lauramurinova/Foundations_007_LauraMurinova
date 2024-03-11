@@ -24,7 +24,6 @@ public class Grab : MonoBehaviour
     {
         if (_grabPressed)
         {
-            Debug.Log("RELEASEd");
             _grabPressed = false;
 
             if (!_grabbedObject) return;
@@ -33,7 +32,6 @@ public class Grab : MonoBehaviour
         }
         else
         {
-            Debug.Log("PRESSED");
             _grabPressed = true;
 
             if (Physics.Raycast(_cameraPosition.position, _cameraPosition.forward, out RaycastHit hit, _grabRange))
