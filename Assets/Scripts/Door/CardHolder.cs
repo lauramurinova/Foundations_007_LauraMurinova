@@ -28,12 +28,14 @@ public class CardHolder : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out AccessCard accessCard)) return;
+
+        if (_accessGranted) return;
         
-        if (accessCard._accessCardGroup == _accessGroup && !_accessGranted)
+        if (accessCard._accessCardGroup == _accessGroup)
         {
             GrantAccess();
         }
-        else if(!_accessDenied && !_accessGranted)
+        else 
         {
             DenyAccess();
         }
