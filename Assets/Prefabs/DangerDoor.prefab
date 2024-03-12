@@ -1502,7 +1502,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardHolder (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4701219612250495572, guid: b42af3674d9d1b7419bb7176a25a3dc6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b42af3674d9d1b7419bb7176a25a3dc6, type: 3}
 --- !u!4 &6234381404521752174 stripped
 Transform:
@@ -1572,7 +1573,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardHolder (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4701219612250495572, guid: b42af3674d9d1b7419bb7176a25a3dc6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b42af3674d9d1b7419bb7176a25a3dc6, type: 3}
 --- !u!4 &7206696112715941165 stripped
 Transform:

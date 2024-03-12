@@ -51,6 +51,11 @@ public class Grab : MonoBehaviour
     /// </summary>
     public void AddItemToInventory(Rigidbody item)
     {
+        if (_grabbedObject.TryGetComponent(out Gun gun))
+        {
+            gun.isGrabbed = false;
+        }
+        
         _inventory.Add(item);
         _grabbedObject.gameObject.SetActive(false);
         _grabbedObject = null;
@@ -115,7 +120,7 @@ public class Grab : MonoBehaviour
         if (_grabbedObject.TryGetComponent(out Gun gun))
         {
             gun.isGrabbed = true;
-        };
+        }
     }
 
     private void DropGrabbedObject()

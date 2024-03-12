@@ -25,7 +25,7 @@ public class CardHolder : MonoBehaviour
     /// Checks whether a card was held near the holder.
     /// If the card has the right access group grant access otherwise deny access. 
     /// </summary>
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out AccessCard accessCard)) return;
         
@@ -90,7 +90,12 @@ public class CardHolder : MonoBehaviour
     /// </summary>
     private void Reset()
     {
-        CloseDoor();
+        if (_accessGranted)
+        {
+            CloseDoor();
+            _alarmLight.color = Color.red;
+        }
+
         _accessGranted = false;
         _accessDenied = false;
         _accessTimer = 0f;
@@ -99,7 +104,6 @@ public class CardHolder : MonoBehaviour
         _renderer.materials = materials;
         _text.text = "";
         _text.color = Color.white;
-        _alarmLight.color = Color.red;
     }
 
     /// <summary>

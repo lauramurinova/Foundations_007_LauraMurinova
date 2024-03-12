@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
    [SerializeField] private GameObject _bullet;
    [SerializeField] private float _fireCountDown = 0.25f;
    [SerializeField] private AudioSource _fireBulletAudio;
-
+   [SerializeField] private Rigidbody _rigidbody;
 
    private float _fireTimer = 0f;
 
@@ -24,10 +24,10 @@ public class Gun : MonoBehaviour
    {
       if (_fireTimer < _fireCountDown || !isGrabbed) return;
       
-      Instantiate(_bullet, transform);
+      Instantiate(_bullet, transform.position - transform.forward, transform.rotation);
       _fireBulletAudio.Play();
       _fireTimer = 0f;
-      GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 10f);
+      _rigidbody.AddForce(transform.forward * 3f, ForceMode.Impulse);
    }
 
    private void Update()
