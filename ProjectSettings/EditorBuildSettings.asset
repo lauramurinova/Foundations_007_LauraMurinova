@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: b92b9f42816eb5543ba861c51a6f5dba
-  - enabled: 1
-    path: Assets/Scenes/Circus_Level.unity
-    guid: 5a905461a6b08c14ba07e3fb3cec5290
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 664bc108e2bb5b0458cb5210bf570952, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
