@@ -11,5 +11,6 @@ public class GoalTrigger : MonoBehaviour
       if (!other.gameObject.CompareTag("Player")) return;
       
       onGoalReached.Invoke();
+      
    }
 }
