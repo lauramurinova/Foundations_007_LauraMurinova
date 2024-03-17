@@ -18,6 +18,9 @@ public class Can : MonoBehaviour
         _initialRotation = _transform.rotation;
     }
 
+    /// <summary>
+    /// Resets the transform position to initial.
+    /// </summary>
     public void ResetToInitial()
     {
         _knockedDown = false;
@@ -25,6 +28,9 @@ public class Can : MonoBehaviour
         _transform.rotation = _initialRotation;
     }
 
+    /// <summary>
+    /// Returns true if the can has been knocked down, otherwise false.
+    /// </summary>
     public bool IsKnockedDown()
     {
         return _knockedDown;
@@ -32,9 +38,13 @@ public class Can : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_knockedDown) return;
+        
+        //continuously check if the can has been knocked down based on its rotation,
+        //knock down threshold can be adjusted by preferences
         float angle = Quaternion.Angle(transform.rotation, _initialRotation);
 
-        if (angle > knockdownThresholdAngle && !_knockedDown)
+        if (angle > knockdownThresholdAngle)
         {
             _knockedDown = true;
         }
@@ -42,6 +52,7 @@ public class Can : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        //if anything collides with the can, play hit sound
         _hit.Play();
     }
 }

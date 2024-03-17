@@ -9,6 +9,9 @@ public class TossBall : MonoBehaviour
         _initialPosition = transform.position;
     }
 
+    /// <summary>
+    /// Resets the transform position to initial.
+    /// </summary>
     public void ResetToInitial()
     {
         transform.position = _initialPosition;
