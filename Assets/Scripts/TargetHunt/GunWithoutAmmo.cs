@@ -18,7 +18,7 @@ public class GunWithoutAmmo : Gun
     {
         if(!HasAmmo()) return;
 
-        if(HasBullets()) return;
+        if(!HasBullets()) return;
         
         _audioSource.clip = _fireAmmoClip;
         base.FireBullet();
@@ -32,14 +32,12 @@ public class GunWithoutAmmo : Gun
     /// </summary>
     public void InsertAmmo(SelectEnterEventArgs args)
     {
-        Debug.Log(args.interactable);
         if (!args.interactable.TryGetComponent(out Ammo ammo)) return;
 
         _audioSource.clip = _insertAmmoClip;
         _audioSource.Play();
         _ammo = ammo;
         _ammo.gameObject.layer = LayerMask.NameToLayer("Ammo");
-        Debug.Log(_ammo.gameObject.layer);
         _ammoLeftText.text = "Ammo Left:\n " + _ammo.bullets;
     }
 
@@ -58,6 +56,9 @@ public class GunWithoutAmmo : Gun
         _ammo = null;
     }
 
+    /// <summary>
+    /// Returns true if ammo was inserted into the gun, false otherwise.
+    /// </summary>
     private bool HasAmmo()
     {
         if (_ammo == null)
@@ -68,9 +69,12 @@ public class GunWithoutAmmo : Gun
         return true;
     }
     
+    /// <summary>
+    /// Returns true if has ammo with bullets in it, false otherwise.
+    /// </summary>
     private bool HasBullets()
     {
-        if (_ammo.bullets == 0)
+        if (!HasAmmo() || _ammo.bullets == 0)
         {
             _ammoLeftText.text = "No Bullets Left";
             return false;

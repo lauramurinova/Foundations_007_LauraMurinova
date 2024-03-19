@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8225599012562491752}
   - component: {fileID: 4038778088629045348}
   - component: {fileID: 5357786090153586796}
-  - component: {fileID: 2246697665246752615}
   - component: {fileID: -2702170811284689950}
   m_Layer: 0
   m_Name: HitParticleSystem
@@ -4864,18 +4863,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2246697665246752615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7324225721547341873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c22aaddbc494644a68cc5ad13d5c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &-2702170811284689950
 AudioSource:
   m_ObjectHideFlags: 0

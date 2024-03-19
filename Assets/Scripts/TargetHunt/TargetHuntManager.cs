@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -89,7 +88,6 @@ public class TargetHuntManager : CarnivalActivity
                 knockedDown = false;
             }
         }
-
         return knockedDown;
     }
     
@@ -98,13 +96,21 @@ public class TargetHuntManager : CarnivalActivity
     /// </summary>
     public override void ResetGame()
     {
+        ResetTargets();
+        _gameWon = false;
+        _currentScore = 0;
+        UpdateScoreText();
+    }
+
+    /// <summary>
+    /// Resets the targets to the initial state.
+    /// </summary>
+    private void ResetTargets()
+    {
         foreach (MovingTarget movingTarget in _movingTargets)
         {
             movingTarget.ResetToInitial();
         }
-        _gameWon = false;
-        _currentScore = 0;
-        UpdateScoreText();
     }
     
     /// <summary>

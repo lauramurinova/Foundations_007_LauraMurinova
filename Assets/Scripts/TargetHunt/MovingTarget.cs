@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class MovingTarget : MonoBehaviour
 {
@@ -32,6 +30,17 @@ public class MovingTarget : MonoBehaviour
         }
         
         transform.position = Vector3.MoveTowards(transform.position, _wayPoints[_currentWayPointIndex].position, _speed * Time.deltaTime);
+    }
+    
+    /// <summary>
+    /// Checks if the bullet collided with a target and makes it collapse.
+    /// </summary>
+    private void OnCollisionEnter(Collision other)
+    {
+        if(!other.transform.GetComponent<Bullet>()) return;
+        
+        float knockDownDistanceFactor = Vector3.Distance(GetCollisionCenter(other), GetCenter().position);
+        KnockDown(knockDownDistanceFactor);
     }
 
     /// <summary>
@@ -71,5 +80,19 @@ public class MovingTarget : MonoBehaviour
     public Transform GetCenter()
     {
         return _center;
+    }
+    
+    /// <summary>
+    /// Returns the center point of collision.
+    /// </summary>
+    private Vector3 GetCollisionCenter(Collision collision)
+    {
+        Vector3 centerPoint = Vector3.zero;
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            centerPoint += contact.point;
+        }
+        centerPoint /= collision.contacts.Length;
+        return centerPoint;
     }
 }

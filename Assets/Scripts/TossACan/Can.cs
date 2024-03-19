@@ -4,7 +4,7 @@ using UnityEngine;
 public class Can : MonoBehaviour
 {
     [SerializeField] private AudioSource _hit;
-    [SerializeField] private float knockdownThresholdAngle = 45f;
+    [SerializeField] private float _knockdownThresholdAngle = 45f;
     
     private bool _knockedDown = false;
     private Vector3 _initialPosition;
@@ -44,7 +44,7 @@ public class Can : MonoBehaviour
         //knock down threshold can be adjusted by preferences
         float angle = Quaternion.Angle(transform.rotation, _initialRotation);
 
-        if (angle > knockdownThresholdAngle)
+        if (angle > _knockdownThresholdAngle)
         {
             _knockedDown = true;
         }
