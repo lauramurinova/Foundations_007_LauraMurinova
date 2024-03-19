@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TossACanManager : MonoBehaviour
+public class TossACanManager : CarnivalActivity
 {
    [SerializeField] private List<Can> _cans;
    [SerializeField] private List<TossBall> _tossBalls;
-   [SerializeField] private Animator _winAnimation;
-   [SerializeField] private AudioSource _winSound;
 
    private bool _gameWon = false;
 
@@ -22,19 +20,17 @@ public class TossACanManager : MonoBehaviour
 
    /// <summary>
    /// Called when user knocked down all the cans.
-   /// Starts the win effects, animation of sign and play win sounds.
    /// </summary>
-   private void WonGame()
+   protected override void WonGame()
    {
+      base.WonGame();
       _gameWon = true;
-      _winAnimation.SetTrigger("Win");
-      _winSound.Play();
    }
 
    /// <summary>
    /// Resets the game with cans and balls to initial positions.
    /// </summary>
-   public void ResetGame()
+   public override void ResetGame()
    {
       _gameWon = false;
       
