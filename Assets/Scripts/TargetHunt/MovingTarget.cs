@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -52,10 +53,30 @@ public class MovingTarget : MonoBehaviour
     {
         if(_knockedDown) return;
         
-        transform.localEulerAngles += new Vector3(80, 00, 0);
+        StartCoroutine(RotateObjectByEuler(new Vector3(0f, 80f, 0f), 0.25f));
         _knockedDown = true;
         int score = (int)(_baseScore * 1/hitDistanceFactor);
         knockedDownEvent.Invoke(score);
+    }
+    
+    /// <summary>
+    /// Rotate object continuously by the desired rotation angle.
+    /// </summary>
+    private IEnumerator RotateObjectByEuler(Vector3 targetRotation, float duration)
+    {
+        Quaternion startRotation = transform.localRotation;
+        Quaternion endRotation = startRotation * Quaternion.Euler(targetRotation);
+        
+        float counter = 0f;
+
+        while (counter < duration)
+        {
+            transform.localRotation = Quaternion.Slerp(startRotation, endRotation, counter / duration);
+            counter += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localRotation = endRotation;
     }
 
     /// <summary>
@@ -64,7 +85,7 @@ public class MovingTarget : MonoBehaviour
     public void ResetToInitial()
     {
         _currentWayPointIndex = 0;
-        transform.localEulerAngles -= new Vector3(80, 0, 0);
+        StartCoroutine(RotateObjectByEuler(new Vector3(0f, -80f, 0f), 0.5f));
         _knockedDown = false;
     }
 
