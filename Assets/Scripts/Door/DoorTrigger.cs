@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject _door;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,11 +22,11 @@ public class DoorTrigger : MonoBehaviour
 
     protected void OpenDoor()
     {
-        door.SetActive(false);
+        _door.SetActive(false);
     }
 
     protected void CloseDoor()
     {
-        door.SetActive(true);
+        _door.SetActive(true);
     }
 }

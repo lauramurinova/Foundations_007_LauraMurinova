@@ -21,7 +21,7 @@ public class GameEventManager : MonoBehaviour
     [SerializeField] private AudioClip _successMusic;
 
     private PlayerInput _playerInput;
-    private FirstPersonController _fpController;
+    // private FirstPersonController _fpController;
     private bool _isFadingIn = false;
     private float _fadeLevel = 0f;
     private bool _isGoalReached = false;
@@ -40,7 +40,7 @@ public class GameEventManager : MonoBehaviour
         if (player)
         {
             _playerInput = player.GetComponent<PlayerInput>();
-            _fpController = player.GetComponent<FirstPersonController>();
+            // _fpController = player.GetComponent<FirstPersonController>();
         }
         else
         {
@@ -83,9 +83,9 @@ public class GameEventManager : MonoBehaviour
         _isFadingIn = true;
         _isGoalReached = true;
         
-        _successPanel.SetActive(true);
+        // _successPanel.SetActive(true);
         
-        DeactivateInput();
+        // DeactivateInput();
         PlayBGM(_successMusic);
     }
 
@@ -100,11 +100,13 @@ public class GameEventManager : MonoBehaviour
         
         _isFadingIn = true;
         
-        _failedPanel.SetActive(true);
+        // _failedPanel.SetActive(true);
+
+        // Debug.Log(_fpController);
+        // Debug.Log(_fpController.CinemachineCameraTarget);
+        // _fpController.CinemachineCameraTarget.transform.LookAt(enemyThatFoundPlayer);
         
-        _fpController.CinemachineCameraTarget.transform.LookAt(enemyThatFoundPlayer);
-        
-        DeactivateInput();
+        // DeactivateInput();
         PlayBGM(_caughtMusic);
     }
 

@@ -34,6 +34,7 @@ public class SoundEmitter : MonoBehaviour
         
         if (other.impulse.magnitude > _impulseThreshold || other.gameObject.CompareTag("Player"))
         {
+            Debug.Log(other.gameObject.name);
             _audioSource.Play();
             onEmitSound.Invoke();
             

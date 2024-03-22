@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class FieldOfView : MonoBehaviour
 {
     public List<Transform> visibleObjects;
+    public Creature creature;
     
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private float _viewRadius = 6f;
     [SerializeField] private float _viewAngle = 30f;
     [SerializeField] private LayerMask _blockingLayers;
     
-    public Creature creature;
-
     private void Update()
     {
         visibleObjects.Clear();
@@ -21,7 +19,11 @@ public class FieldOfView : MonoBehaviour
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, _viewRadius);
         foreach (Collider target in targetsInViewRadius)
         {
-            if (!target.TryGetComponent(out Creature targetCreature)) continue;
+            if (!target.TryGetComponent(out Creature targetCreature))
+            {
+                targetCreature = target.GetComponentInParent<Creature>();
+                if (!targetCreature) continue;
+            };
             
             if(creature.team.Equals(targetCreature.team)) continue;
             
@@ -40,13 +42,14 @@ public class FieldOfView : MonoBehaviour
                     continue;
                 }
                 
-                Debug.DrawLine(headPos, targetHeadPos, Color.cyan);
+                // Debug.DrawLine(headPos, targetHeadPos, Color.cyan);
                 
                 visibleObjects.Add(target.transform);
             }
         }
     }
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Handles.color = _gizmoColor;
@@ -59,4 +62,5 @@ public class FieldOfView : MonoBehaviour
         Handles.DrawLine(transform.position, transform.position + (lineA * _viewRadius));
         Handles.DrawLine(transform.position, transform.position + (lineB * _viewRadius));
     }
+    #endif
 }
