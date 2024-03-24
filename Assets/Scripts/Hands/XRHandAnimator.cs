@@ -21,21 +21,29 @@ namespace Hands
 
         private void Fist(InputAction.CallbackContext ctx)
         {
+            if(_animator == null) return;
+            
             _animator.SetBool("Fist", true);
         }
 
         private void FistReleased(InputAction.CallbackContext ctx)
         {
+            if(_animator == null) return;
+            
             _animator.SetBool("Fist", false);
         }
 
         private void PointReleased(InputAction.CallbackContext ctx)
         {
+            if(_animator == null) return;
+            
             _animator.SetBool("Point", false);
         }
 
         private void Point(InputAction.CallbackContext ctx)
         {
+            if(_animator == null) return;
+            
             _animator.SetBool("Point", true);
         }
     }
