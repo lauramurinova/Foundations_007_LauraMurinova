@@ -96,7 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5ba3769ec50854ebe15c5ba9a0b3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFire: 0
+  igniteEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  extinguishEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _isOnFire: 0
   _fire: {fileID: 8027521665321446806}
 --- !u!65 &2320877862132908167
 BoxCollider:
@@ -109,8 +115,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.00797642, y: 0.019977802, z: 0.000048695663}
-  m_Center: {x: 0.00025008994, y: -0.009378916, z: -0.000024346984}
+  m_Size: {x: 0.00797642, y: 0.019977802, z: 0.0006178954}
+  m_Center: {x: 0.00025008994, y: -0.009378916, z: -0.000016245416}
 --- !u!1001 &3696200942740080686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 6805758223733935182, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246828797338013065, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.274
       objectReference: {fileID: 0}
     - target: {fileID: 7257352279431657848, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
       propertyPath: m_LocalRotation.w

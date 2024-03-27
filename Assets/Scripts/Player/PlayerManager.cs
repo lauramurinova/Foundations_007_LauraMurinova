@@ -19,9 +19,6 @@ public class PlayerManager : MonoBehaviour
     private Quaternion _initialRotation;
     private float _lifeTimer;
 
-    /// <summary>
-    /// Resets transform to initial state.
-    /// </summary>
     public void ResetToInitial()
     {
         transform.position = _initialPosition;

@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.009393596, y: 0.0034179573, z: 0.011286337}
-  m_Center: {x: 0.001098814, y: 0.0016171512, z: -0.00050039764}
+  m_Size: {x: 0.009393595, y: 0.0047674906, z: 0.011286337}
+  m_Center: {x: 0.001098814, y: 0.002291918, z: -0.00050039764}
 --- !u!114 &39827490782929789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5ba3769ec50854ebe15c5ba9a0b3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFire: 0
+  igniteEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  extinguishEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _isOnFire: 0
   _fire: {fileID: 2015206382955120825}
 --- !u!1001 &5177878190707961089
 PrefabInstance:
@@ -125,6 +131,26 @@ PrefabInstance:
     - target: {fileID: 1228074774080194910, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485164408657769000, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_Height
+      value: 3.9321172
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485164408657769000, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_Radius
+      value: 0.9337949
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485164408657769000, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_Center.x
+      value: -0.18873589
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485164408657769000, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_Center.y
+      value: 1.7022702
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485164408657769000, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
+      propertyPath: m_Center.z
+      value: -0.08799751
       objectReference: {fileID: 0}
     - target: {fileID: 5175024226467887502, guid: 2058b115adbacf442930df7a88d266aa, type: 3}
       propertyPath: m_IsActive
