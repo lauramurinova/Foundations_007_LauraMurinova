@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,23 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class GameEventManager : MonoBehaviour
 {
+    public enum GameMode
+    {
+        FP, VR
+    }
+    
+    [Header("Accessibility")] public Handed handedness;
+
+    public GameMode gameMode;
     
     [Header("UI")]
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private GameObject _failedPanel;
     [SerializeField] private GameObject _successPanel;
     [SerializeField] private float _canvasFadeTime = 2f;
+    [SerializeField] private Material _skyboxMaterial;
 
     [Header("Audio")] 
     [SerializeField] private AudioSource _bgmSource;
     [SerializeField] private AudioClip _caughtMusic;
     [SerializeField] private AudioClip _successMusic;
 
-    private PlayerInput _playerInput;
+    // private PlayerInput _playerInput;
     // private FirstPersonController _fpController;
     private bool _isFadingIn = false;
     private float _fadeLevel = 0f;
     private bool _isGoalReached = false;
+
+    private Color _initialSkyboxColor;
+    private float _initialSkyboxExposure;
+    private float _initialAthmosphereThickness;
 
     void Start()
     {
@@ -39,7 +50,7 @@ public class GameEventManager : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         if (player)
         {
-            _playerInput = player.GetComponent<PlayerInput>();
+            // _playerInput = player.GetComponent<PlayerInput>();
             // _fpController = player.GetComponent<FirstPersonController>();
         }
         else
@@ -50,6 +61,11 @@ public class GameEventManager : MonoBehaviour
         _canvasGroup.alpha = 0f;
         _failedPanel.SetActive(false);
         _successPanel.SetActive(false);
+        
+        ResetShaderValues();
+        _initialAthmosphereThickness = _skyboxMaterial.GetFloat("_AtmosphereThickness");
+        _initialSkyboxExposure = _skyboxMaterial.GetFloat("_Exposure");
+        _initialSkyboxColor = _skyboxMaterial.GetColor("_SkyTint");
     }
 
     private void Update()
@@ -73,8 +89,12 @@ public class GameEventManager : MonoBehaviour
 
     public void RestartScene()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+
+        ResetShaderValues();
+        Time.timeScale = 1f;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
@@ -83,7 +103,7 @@ public class GameEventManager : MonoBehaviour
         _isFadingIn = true;
         _isGoalReached = true;
         
-        // _successPanel.SetActive(true);
+        _successPanel.SetActive(true);
         
         // DeactivateInput();
         PlayBGM(_successMusic);
@@ -97,22 +117,61 @@ public class GameEventManager : MonoBehaviour
     private void PlayerFound(Transform enemyThatFoundPlayer)
     {
         if (_isGoalReached) return;
-        
-        _isFadingIn = true;
-        
-        // _failedPanel.SetActive(true);
 
-        // Debug.Log(_fpController);
-        // Debug.Log(_fpController.CinemachineCameraTarget);
-        // _fpController.CinemachineCameraTarget.transform.LookAt(enemyThatFoundPlayer);
+        _failedPanel.SetActive(true);
+        if (gameMode == GameMode.FP)
+        {
+            _isFadingIn = true;
+            // _fpController.CinemachineCameraTarget.transform.LookAt(enemyThatFoundPlayer);
+        }
+        else
+        {
+            StartCoroutine(GameOverFadeOut(1));
+        }
         
         // DeactivateInput();
         PlayBGM(_caughtMusic);
     }
 
+    private IEnumerator GameOverFadeOut(float _startDelay = 0f)
+    {
+        yield return new WaitForSeconds(_startDelay);
+        
+        Time.timeScale = 0;
+        
+        float fade = 0;
+
+        while (fade < 1)
+        {
+            fade += Time.unscaledDeltaTime / _canvasFadeTime;
+            Shader.SetGlobalFloat("_AllWhite", fade);
+            _skyboxMaterial.SetFloat("_AtmosphereThickness", Mathf.Lerp(_initialAthmosphereThickness, 0.7f, fade));
+            _skyboxMaterial.SetFloat("_Exposure",Mathf.Lerp(_initialSkyboxExposure, 8, fade));
+            _skyboxMaterial.SetColor("_SkyTint", Color.Lerp(_initialSkyboxColor, Color.white, fade));
+            
+            yield return null;
+        }
+
+        yield return new WaitForSecondsRealtime(2f);
+        RestartScene();
+    }
+
+    private void OnDestroy()
+    {
+        ResetShaderValues();
+    }
+
+    private void ResetShaderValues()
+    {
+        Shader.SetGlobalFloat("_AllWhite", 0);
+        _skyboxMaterial.SetFloat("_AtmosphereThickness", _initialAthmosphereThickness);
+        _skyboxMaterial.SetFloat("_Exposure", _initialSkyboxExposure);
+        _skyboxMaterial.SetColor("_SkyTint", _initialSkyboxColor);
+    }
+
     private void DeactivateInput()
     {
-        _playerInput.DeactivateInput();
+        // _playerInput.DeactivateInput();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
