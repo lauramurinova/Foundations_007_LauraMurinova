@@ -15,13 +15,13 @@ public class GrenadeLauncher : Gun
         _projection.SimulateTrajectory(_bullet, _gunBarrel.position, _gunBarrel.forward * 6f);
     }
 
-    [Button]
     protected override void Fire(ActivateEventArgs arg0)
     {
+        // if(!CanFire()) return;
+        
         base.Fire(arg0);
 
         var bullet = Instantiate(_bullet, _gunBarrel.position, Quaternion.identity);
-        bullet.Init(_gunBarrel.forward * 6f);
-        Destroy(bullet, 6f);
+        bullet.Init(_gunBarrel.forward * 6f, false);
     }
 }
