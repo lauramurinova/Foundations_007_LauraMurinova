@@ -69,18 +69,23 @@ public class Axe : MonoBehaviour
         if(!_transitioning) return;
         
         _transitioning = false;
-        _collisionAudio.Play();
-        _particleSystem.Play();
         FreezeRotation(false);
         
-        Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")))
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.up));
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.right));
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.forward));
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.up));
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.right));
+        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.forward));
+        
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")) && Vector3.Angle(other.contacts[0].normal, -transform.up) < 45f)
         {
             foreach (var contact in other.contacts)
             {
-                if (contact.thisCollider.name.Equals("BladeTip"))
+                if (contact.thisCollider.name.Equals("Blade"))
                 {
+                    _collisionAudio.Play();
+                    _particleSystem.Play();
                     _rigidbody.isKinematic = true;
                     return;
                 }   

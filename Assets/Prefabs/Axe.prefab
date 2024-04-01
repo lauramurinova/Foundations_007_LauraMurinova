@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.75, y: 0.44, z: 1}
   m_Children: []
   m_Father: {fileID: 6357501839193652977}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3256845132418695028
 BoxCollider:
@@ -44,50 +44,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06535918, y: 0.06890223, z: 0.4531404}
   m_Center: {x: -0.014130088, y: -0.025222378, z: 0.27344188}
---- !u!1 &1908801517179554623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 857861574301824283}
-  - component: {fileID: 8348893144470681699}
-  m_Layer: 9
-  m_Name: BladeEnd
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &857861574301824283
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908801517179554623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.44, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6357501839193652977}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8348893144470681699
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908801517179554623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.20763014, y: 0.015911551, z: 0.20935674}
-  m_Center: {x: 0.0014118112, y: -0.1268515, z: 0.663448}
 --- !u!1 &1971760362326720095
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +74,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6357501839193652977}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7716257860701647775
 ParticleSystem:
@@ -4927,8 +4883,6 @@ Transform:
   m_Children:
   - {fileID: 6895252098385403215}
   - {fileID: 764945372469076836}
-  - {fileID: 2483976977865725842}
-  - {fileID: 857861574301824283}
   - {fileID: 103173413285438728}
   - {fileID: 8574428068263230697}
   m_Father: {fileID: 0}
@@ -5251,50 +5205,6 @@ Transform:
   m_Father: {fileID: 6357501839193652977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -66.472, y: 180, z: 0}
---- !u!1 &6899365777821266226
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2483976977865725842}
-  - component: {fileID: 7657045411876793422}
-  m_Layer: 9
-  m_Name: BladeTop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2483976977865725842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6899365777821266226}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.44, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6357501839193652977}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7657045411876793422
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6899365777821266226}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08685496, y: 0.19984122, z: 0.0076666106}
-  m_Center: {x: 0.009787442, y: -0.0075074867, z: 0.7648034}
 --- !u!1 &9145576488991116578
 GameObject:
   m_ObjectHideFlags: 0
@@ -5338,8 +5248,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.057434615, y: 0.14020573, z: 0.29848447}
-  m_Center: {x: -0.027624706, y: 0.11678946, z: 0.66210157}
+  m_Size: {x: 0.19206883, y: 0.23881951, z: 0.29848453}
+  m_Center: {x: -0.010500397, y: 0.06748328, z: 0.66210973}
 --- !u!82 &1770227800
 AudioSource:
   m_ObjectHideFlags: 0
