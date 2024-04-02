@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Plunger : MonoBehaviour
@@ -9,11 +8,7 @@ public class Plunger : MonoBehaviour
         Push = 1
     }
     
-    public bool active = false;
-
-    public GameObject _plunger;
-    public GameObject _sphere;
-    
+    [SerializeField] public Transform _plungerForcePoint;
     [SerializeField] private float _force = 10f;
     [SerializeField] private float _radius = 13f;
     [SerializeField] private PlungerType _type = PlungerType.Pull;
@@ -23,7 +18,9 @@ public class Plunger : MonoBehaviour
     [SerializeField] private Material _disabledMat;
     [SerializeField] private Material _enabledMat;
 
-    private Vector3 direction;
+    private bool _active = false;
+    private Plunger _anotherPlunger;
+
     public void Enable(bool enabled)
     {
         if (enabled)
@@ -34,7 +31,12 @@ public class Plunger : MonoBehaviour
         {
             SetActiveMaterial(_renderer, _disabledMat);
         }
-        active = enabled;
+        _active = enabled;
+    }
+
+    public bool IsActive()
+    {
+        return _active;
     }
 
     private void SetActiveMaterial(MeshRenderer renderer, Material material)
@@ -46,11 +48,9 @@ public class Plunger : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!_active) return;
         
-        
-        if(!active) return;
-        
-        ManipulateRigidbodies(Physics.OverlapSphere(transform.position, _radius, _plungerInteractionLayers));
+        ManipulateRigidbodies(Physics.OverlapSphere(_plungerForcePoint.position, _radius, _plungerInteractionLayers));
         
     }
 
@@ -60,65 +60,74 @@ public class Plunger : MonoBehaviour
         {
             if(!collider.TryGetComponent(out Rigidbody rigidbody)) continue;
 
-            rigidbody.velocity *= 0.5f;
-            rigidbody.useGravity = false;
-            if (IsAnotherPlungerInAreaActive())
+            if (IsAnotherPlungerInAreaActive(out Plunger plunger))
             {
-                // rigidbody.velocity *= 0f;
-                // Vector3 newPosition = ((transform.position + _plunger.transform.position) / 2f) + transform.forward;
-                // direction = newPosition - collider.transform.position;
-                // rigidbody.transform.position = newPosition;
-                
-                if (_type.Equals(PlungerType.Pull))
-                {
-                    Vector3 newPosition = ((transform.position + _plunger.transform.position) / 2f) + transform.forward * 3f;
-                    direction = newPosition - collider.transform.position;
-                    rigidbody.AddForce(direction.normalized * (_force), ForceMode.Acceleration);
-                }
-                else if (_type.Equals(PlungerType.Push))
-                {
-                    Vector3 newPosition = transform.position + transform.forward * 3f;
-                    direction = (newPosition - (transform.position));
-                    rigidbody.AddForce(-direction.normalized * (_force), ForceMode.Acceleration);
-                }
+                ManipulateRigidbodiesIfAnotherPlungerActive(rigidbody, plunger);
             }
             else
             {
-                rigidbody.useGravity = true;
-                if (_type.Equals(PlungerType.Pull))
-                {
-                    direction = transform.position - collider.transform.position;
-                    rigidbody.AddForce(direction.normalized * (_force), ForceMode.Acceleration);
-                }
-                else if (_type.Equals(PlungerType.Push))
-                {
-                    direction = (collider.transform.position - transform.position);
-                    rigidbody.AddForce(direction.normalized * (_force), ForceMode.Acceleration);
-                }
+                ManipulateRigidbodiesWithNoOtherPlunger(rigidbody, collider);
             }
         }
     }
 
-    private bool IsAnotherPlungerInAreaActive()
+    private void ManipulateRigidbodiesWithNoOtherPlunger(Rigidbody rigidbody, Collider collider)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+        if (_type.Equals(PlungerType.Pull))
+        {
+            rigidbody.velocity *= 0.5f;
+            PullRigidbody(collider, rigidbody);
+        }
+        else if (_type.Equals(PlungerType.Push))
+        {
+            rigidbody.velocity *= 0.85f;
+            PushRigidbody(collider, rigidbody);
+        }
+    }
+
+    private void ManipulateRigidbodiesIfAnotherPlungerActive(Rigidbody rigidbody, Plunger plunger)
+    {
+        rigidbody.velocity *= 0.5f;
+        KeepRigidbodyInPlace(rigidbody, plunger);
+    }
+
+    private void PushRigidbody(Collider collider, Rigidbody rigidbody)
+    {
+        var direction = (collider.transform.position - _plungerForcePoint.position);
+        rigidbody.AddForce(direction.normalized * (_force), ForceMode.Acceleration);
+    }
+
+    private void PullRigidbody(Collider collider, Rigidbody rigidbody)
+    {
+        var direction = _plungerForcePoint.position - collider.transform.position;
+        var distance = Vector3.Distance(_plungerForcePoint.position ,collider.transform.position);
+        rigidbody.AddForce(direction.normalized * (_force * distance), ForceMode.Acceleration);
+    }
+
+    private void KeepRigidbodyInPlace(Rigidbody rigidbody, Plunger plunger)
+    {
+        var newPosition = ((_plungerForcePoint.position + plunger._plungerForcePoint.position) / 2f) + _plungerForcePoint.right + _plungerForcePoint.right;
+        var direction = (newPosition - rigidbody.transform.position);
+        var distance = Vector3.Distance(newPosition ,rigidbody.transform.position);
+        rigidbody.AddForce(direction * (_force * distance * 0.25f), ForceMode.Acceleration);
+    }
+
+    private bool IsAnotherPlungerInAreaActive(out Plunger plungerFound)
+    {
+        Collider[] colliders = Physics.OverlapSphere(_plungerForcePoint.position, _radius);
         foreach (var collider in colliders)
         {
             if (collider.TryGetComponent(out Plunger plunger) && plunger != this)
             {
-                if (plunger.active)
+                if (plunger.IsActive())
                 {
+                    plungerFound = plunger;
                     return true;
                 }
             }
         }
-        return false;
-    }
 
-    private void OnDrawGizmos()
-    {
-        
-        Vector3 newPosition = ((transform.position + _plunger.transform.position) / 2f) + transform.forward;
-        Gizmos.DrawLine(transform.position, newPosition);
+        plungerFound = null;
+        return false;
     }
 }
