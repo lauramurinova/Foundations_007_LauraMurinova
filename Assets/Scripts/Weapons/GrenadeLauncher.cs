@@ -1,5 +1,3 @@
-using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using Weapons;
@@ -17,7 +15,7 @@ public class GrenadeLauncher : Gun
 
     protected override void Fire(ActivateEventArgs arg0)
     {
-        // if(!CanFire()) return;
+        if(!CanFire()) return;
         
         base.Fire(arg0);
 

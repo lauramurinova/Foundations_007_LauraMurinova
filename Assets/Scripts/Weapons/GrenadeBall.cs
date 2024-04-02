@@ -60,21 +60,28 @@ public class GrenadeBall : MonoBehaviour
             SuckInRigidbodies();
             if (!_blackHole.isPlaying)
             {
-                _blackHole.transform.position = transform.position;
-                _blackHole.Play();
-                _blackHoleAudio.Play(); 
+                ShowBlackHole(transform.position);
             }
         }
         
         if (_explodeTimer > _explodeTime && !_movedObjects)
         {
-            _movedObjects = true;
-            _blackHole.transform.position = transform.position;
-            _blackHole.Play();
-            _blackHoleAudio.Play();
-            StartCoroutine(MoveSuckedInRigidbodies());
-            Destroy(gameObject, _explodeTime*2);
+            TeleportSuckedInRigidbodies();
         }
+    }
+
+    private void ShowBlackHole(Vector3 position)
+    {
+        _blackHole.transform.position = position;
+        _blackHole.Play();
+        _blackHoleAudio.Play();
+    }
+
+    private void TeleportSuckedInRigidbodies()
+    {
+        _movedObjects = true;
+        StartCoroutine(MoveSuckedInRigidbodies());
+        Destroy(gameObject, _explodeTime*2);
     }
 
     private IEnumerator MoveSuckedInRigidbodies()
@@ -83,9 +90,7 @@ public class GrenadeBall : MonoBehaviour
         //testing purposes
         var randomPosition = _blackHole.transform.position + Vector3.right + Vector3.up;
         
-        _blackHole.transform.position = randomPosition;
-        _blackHole.Play();
-        _blackHoleAudio.Play();
+       ShowBlackHole(randomPosition);
         
         
         foreach (var rigidbody in _suckedInRigidbodies)
@@ -132,7 +137,7 @@ public class GrenadeBall : MonoBehaviour
             rigidbody.velocity *= 0.5f;
             var direction = transform.position - rigidbody.transform.position;
             var distance = Vector3.Distance(transform.position ,rigidbody.transform.position);
-            rigidbody.AddForce(direction * (_force * distance), ForceMode.Acceleration);
+            rigidbody.AddForce(direction * (_force * distance * 0.8f), ForceMode.Acceleration);
         }
     }
 }
