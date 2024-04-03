@@ -9908,7 +9908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 6995515721385366512}
-  _force: 100
+  _force: 150
   _forceRadius: 5
   _explodeTime: 0.75
   _interactableLayerMask:

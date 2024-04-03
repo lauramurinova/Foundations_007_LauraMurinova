@@ -52,12 +52,16 @@ public class GrenadeBall : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Takes care of the explosion sequence, first sucking in the rigidbodies and then teleporting them, all within a specified amount of time.
+    /// Calls visual effects of the explosion and teleport.
+    /// </summary>
     private void UpdateExplosion()
     {
         _explodeTimer += Time.deltaTime;
         if (_explodeTimer < _explodeTime/2)
         {
-            SuckInRigidbodies();
+            SuckInRigidbodies(_suckedInRigidbodies);
             if (!_blackHole.isPlaying)
             {
                 ShowBlackHole(transform.position);
@@ -66,10 +70,13 @@ public class GrenadeBall : MonoBehaviour
         
         if (_explodeTimer > _explodeTime && !_movedObjects)
         {
-            TeleportSuckedInRigidbodies();
+            TeleportRigidbodiesToRandomPosition(_suckedInRigidbodies);
         }
     }
 
+    /// <summary>
+    /// Enables the black hole (that sucks in the objects).
+    /// </summary>
     private void ShowBlackHole(Vector3 position)
     {
         _blackHole.transform.position = position;
@@ -77,29 +84,33 @@ public class GrenadeBall : MonoBehaviour
         _blackHoleAudio.Play();
     }
 
-    private void TeleportSuckedInRigidbodies()
+    /// <summary>
+    /// Teleports given rigidbodies to a random position in a world.
+    /// For testing purposes the random position is disabled and it teleports the object to right.
+    /// </summary>
+    private void TeleportRigidbodiesToRandomPosition(List<Rigidbody> rigidbodies)
     {
         _movedObjects = true;
-        StartCoroutine(MoveSuckedInRigidbodies());
+        StartCoroutine(MoveRigidbodies(rigidbodies));
         Destroy(gameObject, _explodeTime*2);
     }
 
-    private IEnumerator MoveSuckedInRigidbodies()
+    private IEnumerator MoveRigidbodies(List<Rigidbody> rigidbodies)
     {
-        // Vector3 randomPosition = new Vector3(Random.Range(15f, 35f), -2f, Random.Range(-20f, -30f));
+        // Vector3 randomPosition = new Vector3(Random.Range(15f, 35f), -2f, Random.Range(-20f, -30f)) + Vector3.up;
         //testing purposes
         var randomPosition = _blackHole.transform.position + Vector3.right + Vector3.up;
         
        ShowBlackHole(randomPosition);
         
         
-        foreach (var rigidbody in _suckedInRigidbodies)
+        foreach (var rig in rigidbodies)
         {
             Vector3 randomDirection = Random.insideUnitSphere;
             randomDirection *= 0.1f;
             randomPosition += randomDirection;
-            rigidbody.transform.position = randomPosition;
-            rigidbody.velocity = Vector3.zero;
+            rig.transform.position = randomPosition;
+            rig.velocity = Vector3.zero;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -108,6 +119,7 @@ public class GrenadeBall : MonoBehaviour
     {
         if(_isGhost || _explode) return;
         
+        // if it collides with the floor, make the ball explode and save all the rigidbodies found within its range, that will be later manipulated.
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")) && (Vector3.Angle(other.contacts[0].normal, Vector3.up) < 15f))
         {
             GetComponent<Rigidbody>().isKinematic = true;
@@ -117,6 +129,9 @@ public class GrenadeBall : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Saves all rigidbodies within the given sphere to a list.
+    /// </summary>
     private void SaveRigidbodiesInArea()
     {
         _suckedInRigidbodies.Clear();
@@ -130,14 +145,17 @@ public class GrenadeBall : MonoBehaviour
         }
     }
 
-    private void SuckInRigidbodies()
+    /// <summary>
+    /// Makes the rigidbodies to move towards the center of the ball/black hole.
+    /// </summary>
+    private void SuckInRigidbodies(List<Rigidbody> rigidbodies)
     {
-        foreach (var rigidbody in _suckedInRigidbodies)
+        foreach (var rig in rigidbodies)
         {
-            rigidbody.velocity *= 0.5f;
-            var direction = transform.position - rigidbody.transform.position;
-            var distance = Vector3.Distance(transform.position ,rigidbody.transform.position);
-            rigidbody.AddForce(direction * (_force * distance * 0.8f), ForceMode.Acceleration);
+            rig.velocity *= 0.5f;
+            var direction = transform.position - rig.transform.position;
+            var distance = Vector3.Distance(transform.position ,rig.transform.position);
+            rig.AddForce(direction * (_force * distance * 0.9f), ForceMode.Acceleration);
         }
     }
 }
