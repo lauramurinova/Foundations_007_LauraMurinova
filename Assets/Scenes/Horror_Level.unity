@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: c8f5080b395a0ac4a8982455014565cb, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a579e7b99b8a8234a8a9751c0bcfaa8d, type: 2}
 --- !u!1 &11338200
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &40613745
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_Name
       value: PatrolRoute (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
@@ -1196,6 +1200,10 @@ PrefabInstance:
     - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_Name
       value: PatrolRoute (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
@@ -1766,6 +1774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot_Enemy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1847,6 +1859,10 @@ PrefabInstance:
     - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Name
       value: Robot_Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
@@ -3105,6 +3121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sci-fi-barrel (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7558294397140169436, guid: b88d26923babf2f4e85f374a260f6c7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8350949990351426313, guid: b88d26923babf2f4e85f374a260f6c7b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3309,6 +3329,10 @@ PrefabInstance:
     - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Name
       value: Robot_Enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
@@ -5899,6 +5923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sci-fi-barrel (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 7558294397140169436, guid: b88d26923babf2f4e85f374a260f6c7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8350949990351426313, guid: b88d26923babf2f4e85f374a260f6c7b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -6584,6 +6612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolRoute (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
       value: 1
@@ -6789,6 +6821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot_Enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6846,7 +6882,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9868
+  m_Name: pb_Mesh-2136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7010,7 +7046,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9514
+  m_Name: pb_Mesh-1782
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7185,7 +7221,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-12334
+  m_Name: pb_Mesh-4654
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7600,6 +7636,10 @@ PrefabInstance:
     - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Name
       value: Robot_Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
@@ -8696,6 +8736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot_Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9091,6 +9135,10 @@ PrefabInstance:
     - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_Name
       value: PatrolRoute (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
@@ -58297,6 +58345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolRoute (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
       value: 1
@@ -58504,7 +58556,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11742
+  m_Name: pb_Mesh-3992
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61651,6 +61703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolRoute (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
       value: 1
@@ -62029,6 +62085,10 @@ PrefabInstance:
     - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Name
       value: Robot_Enemy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791369, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_RootOrder
@@ -62431,7 +62491,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-10318
+  m_Name: pb_Mesh-2624
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -62674,6 +62734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolRoute (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5085171346452719450, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719451, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: patrolType
       value: 0
@@ -62796,7 +62860,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13292
+  m_Name: pb_Mesh-5574
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -63511,7 +63575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1938055526
 Transform:
   m_ObjectHideFlags: 0
@@ -63704,7 +63768,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11196
+  m_Name: pb_Mesh-3514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -64102,7 +64166,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-10842
+  m_Name: pb_Mesh-3154
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -64583,7 +64647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719448, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.22
+      value: 21.65
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719448, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_LocalPosition.y
@@ -64591,7 +64655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719448, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39
+      value: -25.31
       objectReference: {fileID: 0}
     - target: {fileID: 5085171346452719448, guid: 763757b1cb6708d46a38634ea7fcb182, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64660,7 +64724,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1517575783, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 20772395214132511, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_Mesh
@@ -64688,15 +64752,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.74
+      value: 25.33
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -4.01
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.46
+      value: -21.76
       objectReference: {fileID: 0}
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64725,6 +64789,10 @@ PrefabInstance:
     - target: {fileID: 5201338340535791370, guid: 60902f837e794e644b2372163af440b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201338340535791371, guid: 60902f837e794e644b2372163af440b8, type: 3}
+      propertyPath: m_Speed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60902f837e794e644b2372163af440b8, type: 3}
@@ -64762,6 +64830,26 @@ PrefabInstance:
     - target: {fileID: 3256845132418695028, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528822297269081598, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.22070904
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528822297269081598, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
+      propertyPath: m_Size.z
+      value: 0.29848453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528822297269081598, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0105003975
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528822297269081598, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.05842826
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528822297269081598, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
+      propertyPath: m_Center.z
+      value: 0.6621126
       objectReference: {fileID: 0}
     - target: {fileID: 6012783317025809483, guid: 0fe23c3c7bf36c9439830a252382a76f, type: 3}
       propertyPath: m_Name

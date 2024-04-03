@@ -26,6 +26,10 @@ public class Axe : MonoBehaviour
         Assert.IsNotNull(_particleSystem, "Particle System not assigned to object: " + name);
     }
 
+    /// <summary>
+    /// Called when axe was released, if it was thrown with enough strength, enable the axe to get stuck in objects.
+    /// Ensures axe like transitions.
+    /// </summary>
     public void AxeDropped(SelectExitEventArgs arg0)
     {
         _rigidbody.isKinematic = false;
@@ -37,12 +41,24 @@ public class Axe : MonoBehaviour
         _throwAudio.Play();
     }
     
+    /// <summary>
+    /// Called when axe is picked up, makes it ready (physics) to be thrown to objects.
+    /// </summary>
     public void AxePickedUp(SelectEnterEventArgs arg0)
     {
+        transform.parent = null;
         _transitioning = false;
         _rigidbody.isKinematic = false;
         FreezeRotation(false);
 
+        SetRecallListener(arg0);
+    }
+
+    /// <summary>
+    /// Set listener for axe recall - on double select (double trigger).
+    /// </summary>
+    private void SetRecallListener(SelectEnterEventArgs arg0)
+    {
         if (_interactor)
         {
             _interactor.OnDoubleSelect.RemoveAllListeners();
@@ -55,10 +71,14 @@ public class Axe : MonoBehaviour
         _interactor.OnDoubleSelect.AddListener(Recall);
     }
 
+    /// <summary>
+    /// Gets the axe object to last used players interactor. 
+    /// </summary>
     public void Recall()
     {
         if(!_interactor) return;
-        
+
+        transform.parent = null;
         _transitioning = false;
         _rigidbody.isKinematic = false;
         _interactor.interactionManager.ForceSelect(_interactor, _axeInteractable);
@@ -70,27 +90,37 @@ public class Axe : MonoBehaviour
         
         _transitioning = false;
         FreezeRotation(false);
+
+        EnemyController enemyController = null;
         
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.up));
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.right));
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, transform.forward));
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.up));
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.right));
-        Debug.Log("ANGLE " + Vector3.Angle(other.contacts[0].normal, -transform.forward));
-        
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")) && Vector3.Angle(other.contacts[0].normal, -transform.up) < 45f)
+        // checks whether it collided with a wall or enemy and if the axe hit it with the right part (thanks to angles)
+        if ((other.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacles")) || other.gameObject.TryGetComponent(out enemyController)) && Vector3.Angle(other.contacts[0].normal, -transform.up) < 45f)
         {
             foreach (var contact in other.contacts)
             {
                 if (contact.thisCollider.name.Equals("Blade"))
                 {
-                    _collisionAudio.Play();
-                    _particleSystem.Play();
-                    _rigidbody.isKinematic = true;
+                    if (enemyController)
+                    {
+                        enemyController.SetStunned();
+                    }
+                    
+                    SetAxeStuck(other);
                     return;
                 }   
             }
         }
+    }
+
+    /// <summary>
+    /// Sets axe into stuck state, without physics.
+    /// </summary>
+    private void SetAxeStuck(Collision other)
+    {
+        transform.parent = other.transform;
+        _collisionAudio.Play();
+        _particleSystem.Play();
+        _rigidbody.isKinematic = true;
     }
 
     private void Update()
@@ -109,6 +139,9 @@ public class Axe : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Called when axe is thrown, enables nice axe rotation.
+    /// </summary>
     private void FreezeRotation(bool enabled)
     {
         if (enabled)
