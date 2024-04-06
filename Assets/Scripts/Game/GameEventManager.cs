@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using StarterAssets;
 using UnityEngine;
@@ -36,6 +37,11 @@ public class GameEventManager : MonoBehaviour
     private Color _initialSkyboxColor;
     private float _initialSkyboxExposure;
     private float _initialAthmosphereThickness;
+
+    private void Awake()
+    {
+        handedness = (Handed)PlayerPrefs.GetInt("Handedness");
+    }
 
     void Start()
     {
@@ -96,6 +102,11 @@ public class GameEventManager : MonoBehaviour
         Time.timeScale = 1f;
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
     
     public void GoalReached()
@@ -187,5 +198,22 @@ public class GameEventManager : MonoBehaviour
     private void EnemyReturnToPatrol()
     {
         
+    }
+
+    public void ToggleDominantHand()
+    {
+        if (handedness.Equals(Handed.Right))
+        {
+            handedness = Handed.Left;
+        }
+        else
+        {
+            handedness = Handed.Right;
+        }
+        
+        PlayerPrefs.SetInt("Handedness", (int)handedness);
+        PlayerPrefs.Save();
+        
+        RestartScene();
     }
 }

@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 2816724689919102098}
   _animator: {fileID: 4245089919074899279}
+  _menuManager: {fileID: 0}
 --- !u!114 &2816724689919102096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 2816724690452289634}
   _animator: {fileID: 2138296450797846581}
+  _menuManager: {fileID: 0}
 --- !u!114 &2816724690452289636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +724,7 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2816724690504835187}
-  m_ConnectedBody: {fileID: 7451350356919781450}
+  m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 1, z: 1}

@@ -8,7 +8,7 @@ public class GoalTrigger : MonoBehaviour
    
    private void OnTriggerEnter(Collider other)
    {
-      if (!other.gameObject.CompareTag("Player")) return;
+      if (!other.GetComponentInParent<Rigidbody>().gameObject.CompareTag("Player")) return;
       
       onGoalReached.Invoke();
       
