@@ -93,6 +93,11 @@ public class GameEventManager : MonoBehaviour
         _canvasGroup.alpha = _fadeLevel;
     }
 
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void RestartScene()
     {
         // Cursor.visible = false;

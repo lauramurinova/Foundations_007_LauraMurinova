@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,11 @@ namespace UI
          {
             _menuManager.gameObject.SetActive(true);
          }
+      }
+
+      private void OnDestroy()
+      {
+         menuButton.action.started -= MenuButtonPressed;
       }
    }
 }

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: e52b3b56d9859bb4e870d980c5c45534
+  - enabled: 1
     path: Assets/Scenes/VR_Level.unity
     guid: dc98c0b10b43c0644a6fa6d01c3132d9
   m_configObjects:
