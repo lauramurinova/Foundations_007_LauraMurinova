@@ -9,7 +9,7 @@ namespace Hands
     {
         [SerializeField] private ActionBasedController _controller;
         [SerializeField] private Animator _animator;
-        [SerializeField] private MenuManager _menuManager;
+        [SerializeField] private GameObject _menuManager;
         
         private void Start()
         {
@@ -31,7 +31,7 @@ namespace Hands
 
         private void Fist(InputAction.CallbackContext ctx)
         {
-            if(!_menuManager.gameObject.activeSelf) _animator.SetBool("Fist", true);
+            if(!_menuManager.activeSelf) _animator.SetBool("Fist", true);
         }
 
         private void FistReleased(InputAction.CallbackContext ctx)
