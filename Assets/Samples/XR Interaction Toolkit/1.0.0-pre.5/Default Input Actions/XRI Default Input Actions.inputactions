@@ -162,6 +162,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ControlVolume",
+                    "type": "Button",
+                    "id": "0f005c43-1fc0-4b29-849a-9fe27daa6cfd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -505,6 +513,17 @@
                     "action": "OpenMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c30919ba-a903-41a4-987a-7f7c351cd76c",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlVolume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -620,6 +639,14 @@
                     "name": "OpenMenu",
                     "type": "Button",
                     "id": "19cc19b5-3778-48cc-8ad0-45731c361bb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ControlVolume",
+                    "type": "Button",
+                    "id": "5a12a82d-c978-4771-9038-964ab2b5595f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -953,6 +980,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1eab4978-b183-4922-aac0-ab89be4b3182",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlVolume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
