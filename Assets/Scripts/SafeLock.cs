@@ -8,8 +8,6 @@ using UnityEngine.Assertions;
 public class SafeLockLevel
 {
     public int value;
-    public int upperBound;
-    public int lowerBound;
 }
 
 public class SafeLock : MonoBehaviour
@@ -31,6 +29,7 @@ public class SafeLock : MonoBehaviour
     private void Start()
     {
         Assert.IsNotNull(_rotator, "You have not assigned a rotator to the safe lock of object " + name);
+        _state = (_currentlyUnlockingLevel + 1).ToString();
     }
 
     void Update()
@@ -42,36 +41,35 @@ public class SafeLock : MonoBehaviour
         UpdateDisplay();
     }
 
+    /// <summary>
+    /// Calculates the value of the safe lock thats currently set by rotation.
+    /// </summary>
     private void CalculateLockValue()
     {
         if (_lastLockRotation.z - _rotator.transform.rotation.eulerAngles.z > 20)
         {
-            _lastLockRotation = _rotator.transform.rotation.eulerAngles;
-            if (_currentValue + 1 >= _levels[_currentlyUnlockingLevel].upperBound)
-            {
-                _currentValue = _levels[_currentlyUnlockingLevel].lowerBound;
-            }
             _currentValue++;
             _lastLockRotation = _rotator.transform.rotation.eulerAngles;
         }
         else if(_lastLockRotation.z - _rotator.transform.rotation.eulerAngles.z < -20)
         {
-            if (_currentValue - 1 <= _levels[_currentlyUnlockingLevel].lowerBound)
-            {
-                _currentValue = _levels[_currentlyUnlockingLevel].upperBound;
-            }
             _currentValue--;
             _lastLockRotation = _rotator.transform.rotation.eulerAngles;
         }
     }
 
+    /// <summary>
+    /// Updates the safe display values - to show user a feedback.
+    /// </summary>
     private void UpdateDisplay()
     {
         _safeText.text = "Value: " + _currentValue + "\n\nCode: " + _levels[0].value +", " + _levels[1].value
-                         +", " + _levels[2].value +"\nState: "+ _state +
-                         "\nThreshold: 20\nL_Bound: " + _levels[_currentlyUnlockingLevel].lowerBound +"\nU_ Bound: " + _levels[_currentlyUnlockingLevel].upperBound +"\n";
+                         +", " + _levels[2].value +"\nState: "+ _state;
     }
 
+    /// <summary>
+    /// Checks whether the safe current value is the one required by the current level.
+    /// </summary>
     private void CheckForRightCombination(int level)
     {
         if(_unlocked) return;
@@ -90,6 +88,10 @@ public class SafeLock : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the level on the safe - upgrades to next one.
+    /// Called when user unlocked the previous level.
+    /// </summary>
     private IEnumerator ChangeLevel()
     {
         _levelUnlockAudio.Play();
@@ -99,11 +101,15 @@ public class SafeLock : MonoBehaviour
         _changingLevel = false;
     }
 
+    /// <summary>
+    /// Unlocks the safe and sets the door open.
+    /// </summary>
     private void UnlockSafe()
     {
         _safeUnlockAudio.Play();
         _safeDoor.Open();
         _unlocked = true;
         _state = "Unlocked";
+        _safeText.color = Color.green;
     }
 }
