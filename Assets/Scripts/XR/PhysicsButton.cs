@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,56 +6,41 @@ public class PhysicsButton : MonoBehaviour
     public UnityEvent onPressed;
     public UnityEvent onReleased;
 
-    [SerializeField] private float _threshold = 0.1f;
-    [SerializeField] private float _deadzone = 0.025f;
+    [SerializeField] private GameObject _button;
+    [SerializeField] private AudioSource _clickAudio;
+    [SerializeField] private Transform _minButtonPressState;
+    [SerializeField] private Transform _maxButtonPressState;
 
     private bool _isPressed = false;
-    private Vector3 _startPos;
-    private ConfigurableJoint _joint;
+    private GameObject _presser;
 
-    private void Start()
+    private void OnCollisionEnter(Collision other)
     {
-        _startPos = transform.localPosition;
-        _joint = GetComponent<ConfigurableJoint>();
+        if(_isPressed || !other.gameObject.layer.Equals(LayerMask.NameToLayer("Hand")) || Vector3.Angle(other.contacts[0].normal, -transform.up) > 45f) return;
+
+        _button.transform.localPosition = _minButtonPressState.localPosition;
+        _presser = other.gameObject;
+        Pressed();
     }
 
-    private void Update()
+    private void OnCollisionExit(Collision other)
     {
-        if (!_isPressed && GetValue() + _threshold >= 1)
-        {
-            Pressed();
-        }
-
-        if (_isPressed && GetValue() - _threshold <= 0)
-        {
-            Released();
-        }
-    }
-
-    private float GetValue()
-    {
+        if(!_isPressed && !other.gameObject.Equals(_presser)) return;
         
-        var value = Vector3.Distance(_startPos, transform.localPosition) / _joint.linearLimit.limit;
-        if (Math.Abs(value) < _deadzone)
-        {
-            value = 0;
-        }
-
-        return Mathf.Clamp(value, -1f, 1f);
-        
+        _button.transform.localPosition = _maxButtonPressState.localPosition;
+        Released();
     }
 
     private void Pressed()
     {
         _isPressed = true;
+        _clickAudio.Play();
         onPressed.Invoke();
-        Debug.Log("PRESSED");
     }
 
     private void Released()
     {
         _isPressed = false;
         onReleased.Invoke();
-        Debug.Log("RELEASED");
     }
 }

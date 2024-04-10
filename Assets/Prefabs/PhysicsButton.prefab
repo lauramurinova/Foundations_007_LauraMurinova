@@ -160,6 +160,8 @@ MonoBehaviour:
       m_Calls: []
   _button: {fileID: 558612193705948916}
   _clickAudio: {fileID: 6269131906812572540}
+  _minButtonPressState: {fileID: 0}
+  _maxButtonPressState: {fileID: 0}
 --- !u!54 &3981292800410045984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -363,7 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5277423532445878319}
   m_Layer: 13
-  m_Name: EasyPhysicsButton
+  m_Name: PhysicsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,13 +378,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9078454449979115985}
-  m_LocalRotation: {x: -0.013327743, y: -0.7069812, z: 0.013327743, w: 0.7069812}
+  m_LocalRotation: {x: -0.013327885, y: -0.7069812, z: 0.013327885, w: 0.7069812}
   m_LocalPosition: {x: -0.0034000915, y: 0.042699836, z: -0.11709978}
-  m_LocalScale: {x: 0.7499999, y: 0.75000006, z: 0.7500005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3563403729915264643}
   - {fileID: 3087085810076534929}
   - {fileID: 1024089325718086984}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 2.16}

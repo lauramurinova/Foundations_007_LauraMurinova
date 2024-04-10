@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &598911042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598911043}
+  m_Layer: 13
+  m_Name: Min
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &598911043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598911042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.092, y: 0.0087, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2795913718872014887}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2025659459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025659460}
+  m_Layer: 13
+  m_Name: Max
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2025659460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025659459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.092, y: 0.021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2795913718872014887}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8277009412916296264
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,9 +87,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8277009412916296264}
-  m_LocalRotation: {x: -0.018848317, y: -0, z: -0, w: 0.9998223}
+  m_LocalRotation: {x: -0.018848384, y: 0, z: 0, w: 0.9998224}
   m_LocalPosition: {x: -0.0034000915, y: 0.042699836, z: -0.11709978}
-  m_LocalScale: {x: 0.7500001, y: 0.7500001, z: 0.75000024}
+  m_LocalScale: {x: 0.7500003, y: 0.7500001, z: 0.7500003}
   m_Children:
   - {fileID: 4983145280367591577}
   m_Father: {fileID: 0}
@@ -118,21 +178,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8761199581435322610}
     m_Modifications:
+    - target: {fileID: 558612193705948916, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
+      propertyPath: m_Name
+      value: Visual
+      objectReference: {fileID: 0}
     - target: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
       propertyPath: m_LocalPosition.x
@@ -175,9 +227,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6925584562154810041, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
-      propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: _maxButtonPressState
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2025659460}
+    - target: {fileID: 6925584562154810041, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
+      propertyPath: _minButtonPressState
+      value: 
+      objectReference: {fileID: 598911043}
     - target: {fileID: 9078454449979115985, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
       propertyPath: m_Name
       value: EasyPhysicsButton
@@ -187,5 +243,10 @@ PrefabInstance:
 --- !u!4 &4983145280367591577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5277423532445878319, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
+  m_PrefabInstance: {fileID: 872181581094111414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2795913718872014887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3087085810076534929, guid: 1698b38acc67b31408ec57b74836c794, type: 3}
   m_PrefabInstance: {fileID: 872181581094111414}
   m_PrefabAsset: {fileID: 0}

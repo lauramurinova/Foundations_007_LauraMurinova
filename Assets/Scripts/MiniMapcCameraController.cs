@@ -25,7 +25,6 @@ public class MiniMapcCameraController : MonoBehaviour
       {
          _currentView++;
       }
-Debug.Log(_currentView);
       _camera.cullingMask = _cullingLayerMasks[_currentView];
    }
 }
